@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var resultLabel: UILabel!
     
-    var passcode = ""
+    let passcode = "1234"
     var entercode = ""
     
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     // 數字鍵全部拉在同一個 IBAction
     @IBAction func numberButton(_ sender: UIButton) {
         
-        passcode.append("\(sender.tag)")
+        entercode.append("\(sender.tag)")
         
         passcodeImage()
         codeCorrect()
@@ -37,9 +37,9 @@ class ViewController: UIViewController {
     
     // 刪除密碼
     @IBAction func deleteButton(_ sender: Any) {
-        if (passcode.count > 0) && (passcode.count < 5) {
+        if entercode.count > 0 && entercode.count < 5 {
                     
-            passcode.removeLast()
+            entercode.removeLast()
         }
                 
             deletecode()
@@ -49,13 +49,12 @@ class ViewController: UIViewController {
     
     // 判斷輸入的密碼是否正確
     func codeCorrect() {
-        if passcode.count == 4{
-            if passcode == entercode {
+        if entercode.count == 4 {
+            if entercode == passcode {
                 resultLabel.text = "密 碼 正 確"
-                // 密碼正確就跳入下一頁指定的畫面
-                performSegue(withIdentifier: "pass", sender: self)
+                clearCode()
             } else {
-                resultLabel.text = "密碼錯誤，請重新輸入"
+                resultLabel.text = "密碼錯誤，重新輸入"
                 clearCode()
             }
         }
@@ -64,7 +63,7 @@ class ViewController: UIViewController {
     
     // 清除輸入的密碼
     func clearCode() {
-        passcode = ""
+        entercode = ""
         passcodeImageView1.image = UIImage(systemName: "circle")
         passcodeImageView2.image = UIImage(systemName: "circle")
         passcodeImageView3.image = UIImage(systemName: "circle")
@@ -74,7 +73,7 @@ class ViewController: UIViewController {
     
     // 輸入密碼的圖片
     func passcodeImage() {
-        let imageIndex = passcode.count
+        let imageIndex = entercode.count
         switch imageIndex {
             case 1:
                 passcodeImageView1.image = UIImage(systemName: "circle.fill")
@@ -86,13 +85,15 @@ class ViewController: UIViewController {
                 passcodeImageView4.image = UIImage(systemName: "circle.fill")
             default:
                 codeCorrect()
+                
+            
         }
     }
     
     // 刪除密碼的圖片
     func deletecode() {
             
-        let Delcode = passcode.count + 1
+        let Delcode = entercode.count + 1
             
         switch Delcode {
             
