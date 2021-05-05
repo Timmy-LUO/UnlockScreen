@@ -15,9 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var passcodeImageView4: UIImageView!
     
     @IBOutlet weak var deleteButton: UIButton!
-    
     @IBOutlet weak var resultLabel: UILabel!
-    
     
     var passcode = ""
     var entercode = ""
@@ -90,7 +88,6 @@ class ViewController: UIViewController {
                 codeCorrect()
         }
     }
-    
     
     // 刪除密碼的圖片
     func deletecode() {
